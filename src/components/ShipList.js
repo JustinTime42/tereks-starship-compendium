@@ -12,6 +12,7 @@ const ShipList = ({filteredShips}) => {
                             key = {i}
                             shipName = {filteredShips[i].name}
                             imageURL = {filteredShips[i].media[0].images.store_small}
+                            pageURL= {filteredShips[i].url}
                             manufacturer = {filteredShips[i].manufacturer}
                             description = {filteredShips[i].description}
                         />

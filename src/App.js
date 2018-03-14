@@ -25,7 +25,7 @@ class App extends Component {
       <div>
         <header>
           
-          <h1>Welcome to the Starship ARK</h1>
+          <h1 className = "tc">Welcome to the Starship ARK</h1>
         </header>
                 
           <SearchBox searchChange={this.onSearchChange} />          
