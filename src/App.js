@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
+import Footer from './components/Footer';
+import NavBar from './components/NavBar';
 import ships from './ships.js'
-import ShipList from './components//ShipList';
-import SearchBox from './components/SearchBox';
+import ShipList from './components//ShipList'
 
 
 class App extends Component {
@@ -23,13 +24,10 @@ class App extends Component {
     })
     return (
       <div>
-        <header>
-          
-          <h1 className = "tc">Welcome to the Starship ARK</h1>
-        </header>
-                
-          <SearchBox searchChange={this.onSearchChange} />          
-          <ShipList filteredShips={filteredShips} />
+        <NavBar searchChange={this.onSearchChange} /> 
+        <ShipList filteredShips={filteredShips} />        
+        <Footer />
+        
 
       </div>
     )

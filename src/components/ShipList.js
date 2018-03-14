@@ -7,7 +7,7 @@ const ShipList = ({filteredShips}) => {
             {   
                 filteredShips.map((ship, i) => {
                     return (
-                        <div class='fl'>
+                        <div className='fl pt3'>
                         <ShipCard
                             key = {i}
                             shipName = {filteredShips[i].name}
@@ -16,6 +16,9 @@ const ShipList = ({filteredShips}) => {
                             manufacturer = {filteredShips[i].manufacturer}
                             description = {filteredShips[i].description}
                         />
+                        <div class="fog-low">
+    						<img src="https://cdn.rawgit.com/creativetimofficial/paper-kit/bootstrap4-development/assets/img/fog-low.png" alt=""/>
+    					</div>
                         </div>
                     );
                 })    
