@@ -3,7 +3,7 @@ import './ShipCard.css';
 
 const ShipCard =({shipName, imageURL, manufacturer, description, pageURL}) => {
     return (
-        <div className="card w5 dib mr3 grow shadow-5">
+        <div className="card w5 dib ma3 grow shadow-5">
             <img className="card-img-top" src={`https://robertsspaceindustries.com${imageURL}`} alt={shipName}/>
             <div className="card-body">
                 <h5 className="card-title">{shipName}</h5>
