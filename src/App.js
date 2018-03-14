@@ -1,21 +1,39 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import ships from './ships.js'
+import ShipList from './components//ShipList';
+import SearchBox from './components/SearchBox';
+
 
 class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
-    );
+  constructor() {
+    super()
+    this.state = {
+      searchField: '',
+      filteredShips: [],
+    }
   }
+
+  onSearchChange = (event) => {
+    this.setState({searchField: event.target.value})
+  }
+
+  render() {
+    const filteredShips = ships.filter(ship => {
+      return ship.name.toLowerCase().includes(this.state.searchField.toLowerCase())
+    })
+    return (
+      <div>
+        <header>
+          
+          <h1>Welcome to the Starship ARK</h1>
+        </header>
+                
+          <SearchBox searchChange={this.onSearchChange} />          
+          <ShipList filteredShips={filteredShips} />
+
+      </div>
+    )
+  };
 }
 
 export default App;
