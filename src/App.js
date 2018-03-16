@@ -21,10 +21,10 @@ class App extends Component {
   }
 
   componentDidMount(){     
-    fetch('https://stream.watsonplatform.net/authorization/api/v1/token')
+    fetch('https://getstartednode-excellent-panther.mybluemix.net/api/speech-to-text/token')
     .then(function(response) {
         return response.text();
-    }).then(function (token) {
+    }).then((token) => {
       var stream = recognizeMic({
           token: token,
           objectMode: true, // send objects instead of text
@@ -32,11 +32,12 @@ class App extends Component {
           format: false // optional - performs basic formatting on the results such as capitals an periods
       });
       console.log({token});
-      stream.on('data', function(data) {
-        this.setState({searchField:data.alternatives[0].transcript.trim()});
+      stream.on('data', (data) => {
+        this.setState({searchField: data.alternatives[0].transcript.trim()});
+        
         console.log(data);
       });
-      stream.on('error', function(err) {
+      stream.on('error', (err) => {
           console.log(err);
       });
       
