@@ -21,7 +21,7 @@ class App extends Component {
   }
 
   componentDidMount(){     
-    fetch('/api/speech-to-text/token')
+    fetch('https://stream.watsonplatform.net/authorization/api/v1/token')
     .then(function(response) {
         return response.text();
     }).then(function (token) {
