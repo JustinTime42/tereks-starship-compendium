@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Footer from './components/Footer';
 // import Loading from './components/Loading';
 import NavBar from './components/NavBar';
-import ships from './ships.js'
+// import ships from './ships.js'
 import ShipList from './components/ShipList'
 import recognizeMic from 'watson-speech/speech-to-text/recognize-microphone';
 
@@ -13,14 +13,37 @@ class App extends Component {
     this.state = {
       searchField: '',
       filteredShips: [],
+      allShips: [],
     }
   }
 
   onSearchChange = (event) => {
     this.setState({searchField: event.target.value})
+    const searchShips = this.state.allShips.filter(ship => {
+      return ship.name.toLowerCase().includes(this.state.searchField.toLowerCase())
+    })
+    this.setState({filteredShips: searchShips});
   }
 
-  componentDidMount(){     
+  voiceCommands = (input) => {
+    // if //filter through ship names, return any if input.contains(shipName)
+    // this.setState(command:varName)
+    const voiceSearch = this.allShips.filter(ship => {
+      return input.includes(this.allShips.name.toLowerCase())
+      // ship.name.toLowerCase().includes(this.state.searchField.toLowerCase())
+    })
+    this.setState({searchField: voiceSearch});
+    this.setState({filteredShips: voiceSearch});
+
+  }
+
+  componentDidMount(){  
+
+    fetch('https://robertsspaceindustries.com/ship-matrix/index')
+      .then(response => response.json())
+      .then(data => this.setState({allShips: data}));
+      console.log(this.allShips);
+
     fetch('https://getstartednode-excellent-panther.mybluemix.net/api/speech-to-text/token')
     .then(function(response) {
         return response.text();
@@ -32,11 +55,12 @@ class App extends Component {
           format: false // optional - performs basic formatting on the results such as capitals an periods
       });
       console.log({token});
-      stream.on('data', (data) => {
-        this.setState({searchField: data.alternatives[0].transcript.trim()});
+      stream.on('data', (data) => this.voiceCommands(data.alternatives[0].transcript.trim()));
         
-        console.log(data);
-      });
+        // this.setState({searchField: data.alternatives[0].transcript.trim()});
+        
+      //   console.log(data);
+      // });
       stream.on('error', (err) => {
           console.log(err);
       });
@@ -48,14 +72,12 @@ class App extends Component {
   };
 
   render() {
-    const filteredShips = ships.filter(ship => {
-      return ship.name.toLowerCase().includes(this.state.searchField.toLowerCase())
-    })
+   
+    // this.setState({filteredShips: searchShips});
     return (
       <div className='bg-near-white'>        
         <NavBar searchChange={this.onSearchChange} /> 
-        <h1>{this.searchField}</h1>  
-        <ShipList filteredShips={filteredShips} />  
+        <ShipList filteredShips={this.state.filteredShips} />  
         <h1>{this.searchField}</h1>  
         <Footer />        
       </div>
