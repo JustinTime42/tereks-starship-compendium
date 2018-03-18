@@ -25,7 +25,13 @@ class App extends Component {
   }
 
   voiceCommands = (input) => {
-      
+    if (input.includes('scroll down')) {
+      window.scrollBy(0, 400);
+    } else if (input.includes('scroll up')) {
+      window.scrollBy(0, -400); 
+    } else if (input.includes('clear')) {
+      this.setState({filteredShips: ships}); 
+    } else {  
       const searchShips = ships.filter(ship => {
         console.log("input= " + input);
           return ship.name.toLowerCase().split(" ").some(word => {
@@ -34,7 +40,7 @@ class App extends Component {
       console.log("searchShips= " + searchShips);
       this.setState({filteredShips: searchShips}); 
     }
-
+  }
   componentDidMount(){     
     fetch('https://getstartednode-excellent-panther.mybluemix.net/api/speech-to-text/token')
     .then(function(response) {
@@ -49,7 +55,10 @@ class App extends Component {
       console.log({token});
       stream.on('data', (data) => {
         console.log({data});
-        return this.voiceCommands(data.alternatives[0].transcript.trim());        
+        if (data.final){
+          return this.voiceCommands(data.alternatives[0].transcript.trim());
+        }
+                
       });
    
       stream.on('error', (err) => {
