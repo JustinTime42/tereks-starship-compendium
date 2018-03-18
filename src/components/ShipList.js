@@ -1,6 +1,6 @@
 import React from 'react';
 import ShipCard from './ShipCard';
-import App from '../App';
+
 
 const ShipList = ({filteredShips}) => {
     return (            
