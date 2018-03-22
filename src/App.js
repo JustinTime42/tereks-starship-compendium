@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import Footer from './components/Footer';
 // import Loading from './components/Loading';
 import NavBar from './components/NavBar';
-import ships from './ships.js'
+import ships from './ships'
 import ShipList from './components/ShipList'
 import recognizeMic from 'watson-speech/speech-to-text/recognize-microphone';
+import ShipModal from './components/ShipModal';
 
 class App extends Component {
   constructor() {
@@ -12,8 +13,13 @@ class App extends Component {
     this.state = {
       searchField: '',
       filteredShips: ships,
+      showModal: false
     }
   }
+  onModalClick = (shipID) => {
+    console.log(shipID)
+      this.setState({showModal: !this.state.showModal});     
+  };
 
   onSearchChange = (event) => {
     this.setState({searchField: event.target.value})
@@ -72,10 +78,17 @@ class App extends Component {
 
   render() {
     return (
-      <div className='bg-near-white'>        
-        <NavBar searchChange={this.onSearchChange} /> 
-        <ShipList filteredShips={this.state.filteredShips} />  
-        <h1>{this.searchField}</h1>  
+      <div className='bg-near-white'>          
+        <ShipModal 
+          show={this.state.showModal} 
+          onClose={this.onModalClick} 
+       
+        />
+        <NavBar searchChange={this.onSearchChange} />
+        <ShipList 
+          filteredShips={this.state.filteredShips} 
+          modalClick={this.onModalClick}
+        />  
         <Footer />        
       </div>
     )

@@ -1,5 +1,9 @@
 .card {
-    overflow-y: scroll;
+    overflow-y: hidden;
     height: 500px;
 
+}
+
+.card:hover {
+    overflow-y:auto;
 }
