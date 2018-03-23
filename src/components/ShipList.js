@@ -6,19 +6,19 @@ const ShipList = ({filteredShips, modalClick}) => {
  
     return ( 
                   
-        <div className='mt5'>
+        <div>
             {   
                 filteredShips.map((ship, i) => {
                     return (
-                        <div className='fl'>
+                        <div className='fl w-20'>
                             <ShipCard
                                 key = {i}
-                                shipID = {filteredShips[i].id}
-                                shipName = {filteredShips[i].name}
-                                imageURL = {filteredShips[i].media[0].images.store_small}
-                                pageURL= {filteredShips[i].url}
-                                manufacturer = {filteredShips[i].manufacturer}
-                                description = {filteredShips[i].description}
+                                shipID = {ship.id}
+                                shipName = {ship.name}
+                                imageURL = {ship.media[0].images.store_small}
+                                pageURL= {ship.url}
+                                manufacturer = {ship.manufacturer}
+                                description = {ship.description}
                                 onModalClick = {modalClick}
                             />
                         </div>

@@ -3,13 +3,16 @@ import React from 'react';
 
 const NavBar = ({ searchChange }) => {
     return (
-        <nav className="bg-near-white navbar navbar-expand-md fixed-top">
+        <nav className="navbar navbar-light navbar-expand-md fixed-top" style={{background: 'rgba(13, 46, 66, 0.5)'}}>
             <div className="container">
                 <div className="navbar-translate">
-                    <button className="navbar-toggler navbar-toggler-right navbar-burger" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-                        <span className="navbar-toggler-bar"></span>
-                        <span className="navbar-toggler-bar"></span>
-                        <span className="navbar-toggler-bar"></span>
+                    <button className="navbar-toggler navbar-toggler-right navbar-burger" 
+                        type="button" 
+                        data-toggle="collapse" 
+                        data-target="#navbarToggler" 
+                        aria-controls="navbarTogglerDemo02" 
+                        aria-expanded="false" 
+                        aria-label="Toggle navigation">
                     </button>
                     <a className="navbar-brand" href="#">Star Citizen Vehicle Ark</a>
                 </div>
@@ -17,13 +20,24 @@ const NavBar = ({ searchChange }) => {
                     <ul className="navbar-nav ml-auto">
                         <li className="nav-item">
                             <form>
-                                <input className="form-control mr-sm-2 nav-link" type="search" placeholder="Search" aria-label="Search" onChange={searchChange}/>
+                                <input 
+                                    className="form-control mr-sm-2 nav-link" 
+                                    type="search" placeholder="Search" 
+                                    aria-label="Search" 
+                                    onChange={searchChange}
+                                />
                             </form>
                         </li>                   
                         <li className="nav-item">
-                            <a className="nav-link" rel="tooltip" title="Star on GitHub" data-placement="bottom" href="https://github.com/slarti-42/sc-vehicle-ark" target="_blank">
-                                <i className="fa fa-github"></i>
-                                <p className="d-lg-none">GitHub</p>
+                            <a 
+                                className="nav-link" 
+                                rel="tooltip" 
+                                title="Star on GitHub" 
+                                data-placement="bottom" 
+                                href="https://github.com/slarti-42/sc-vehicle-ark" 
+                                target="_blank">
+                                    <i className="fa fa-github"></i>
+                                    <p className="d-lg-none">GitHub</p>
                             </a>
                         </li>
                     </ul>

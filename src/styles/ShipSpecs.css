@@ -1,0 +1,19 @@
+.outer-grid-container {
+    display: grid;
+    grid-template-columns: auto auto;
+    justify-content: space-around;
+    grid-column-gap: 20px;
+    grid-row-gap: 5px;
+}
+
+.inner-grid-container {
+    display: grid;
+    grid-template-columns: auto auto;
+    justify-content: stretch;
+    grid-column-gap: 20px;
+}
+
+.gridTitle {
+    grid-column: 1 / span 2;
+    text-align: center;
+}
