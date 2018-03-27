@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import Footer from './components/Footer';
+import Footer from '../components/Footer';
 // import Loading from './components/Loading'; TODO
-import NavBar from './components/NavBar';
-import ships from './ships'
-import ShipList from './components/ShipList'
+import NavBar from '../components/NavBar';
 import recognizeMic from 'watson-speech/speech-to-text/recognize-microphone';
-import ShipModal from './components/ShipModal';
+import ShipList from '../components/ShipList'
+import ShipModal from '../components/ShipModal';
+import ships from '../ships'
+import SideBar from './SideBar'
 
 class App extends Component {
   constructor() {
@@ -14,7 +15,8 @@ class App extends Component {
       searchField: '',
       filteredShips: ships,
       showModal: false,
-      shipID: ''
+      shipID: '',
+      searchParams: []
     }
   }
   onModalClick = (shipID) => {
@@ -71,17 +73,23 @@ class App extends Component {
 
   render() {
     return (
-      <div className='bg-near-white'>          
+      <div className='grid-container'>   
+        <SideBar searchParams={this.searchParams} />
+        <NavBar searchChange={this.onSearchChange} /> 
+        
+              
         <ShipModal 
           show={this.state.showModal} 
           onClose={this.onModalClick}  
           shipID={this.state.shipID}      
         />
-        <NavBar searchChange={this.onSearchChange} />
+        <div className='grid-shiplist'>       
         <ShipList 
           filteredShips={this.state.filteredShips} 
           modalClick={this.onModalClick}
         />  
+        </div>
+
         <Footer />        
       </div>
     )

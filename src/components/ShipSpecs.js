@@ -1,31 +1,18 @@
 import React from 'react';
-import {Panel, PanelGroup, Accordion} from 'react-bootstrap'
+import {Panel, PanelGroup} from 'react-bootstrap'
 import '../styles/ShipSpecs.css'
 import SpecParser from './SpecParser'
 
 
 
 const ShipSpecs = ({ship}) => {
-    
-        // {
-        //     name: 'justin',
-        //     size: 'large',
-        //     quantity: '1'
-        // },
-        // {
-        //     name: 'bob',
-        //     size: 'small',
-        //     quantity: '2'
-        // }
-        
-          
     return (
         
-        <PanelGroup accordion id="accordion-example">
+        <PanelGroup accordion>
             
             <Panel eventKey="1">
-                <Panel.Heading>
-                    <Panel.Title toggle>Specifications</Panel.Title>
+                <Panel.Heading style={{color: '#0A89BB', backgroundColor:'#05263E', textAlign: 'center'}}> 
+                    <Panel.Title toggle><div className='specBlock'>Specifications</div></Panel.Title>
                 </Panel.Heading>                
                 <Panel.Body collapsible>
                     <div className="outer-grid-container">
@@ -75,8 +62,8 @@ const ShipSpecs = ({ship}) => {
                 </Panel.Body>
             </Panel>
             <Panel eventKey="2">
-                <Panel.Heading>
-                    <Panel.Title toggle>Weapons</Panel.Title>
+                <Panel.Heading style={{color: '#0A89BB', backgroundColor:'#05263E', textAlign: 'center'}}>
+                    <Panel.Title toggle className='panelHeading'><div className='specBlock'>Weapons</div></Panel.Title>
                 </Panel.Heading>
                 <Panel.Body collapsible>
                     <div className="outer-grid-container">                          
@@ -92,8 +79,8 @@ const ShipSpecs = ({ship}) => {
                 </Panel.Body>
             </Panel>
             <Panel eventKey="3">
-                <Panel.Heading>
-                    <Panel.Title toggle>Systems</Panel.Title>
+                <Panel.Heading style={{color: '#0A89BB', backgroundColor:'#05263E', textAlign: 'center'}}>
+                    <Panel.Title toggle className='panelHeading'><div className='specBlock'>Systems</div></Panel.Title>
                 </Panel.Heading>
                 <Panel.Body collapsible>
                     <div className="outer-grid-container">                          
@@ -111,8 +98,8 @@ const ShipSpecs = ({ship}) => {
                 </Panel.Body>
             </Panel>
             <Panel eventKey="4">
-                <Panel.Heading>
-                    <Panel.Title toggle>Propulsion</Panel.Title>
+                <Panel.Heading style={{color: '#0A89BB', backgroundColor:'#05263E', textAlign: 'center'}}>
+                    <Panel.Title toggle className='panelHeading'><div className='specBlock'>Propulsion</div></Panel.Title>
                 </Panel.Heading>
                 <Panel.Body collapsible>
                     <div className="outer-grid-container">                                                                       

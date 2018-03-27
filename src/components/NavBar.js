@@ -3,7 +3,7 @@ import React from 'react';
 
 const NavBar = ({ searchChange }) => {
     return (
-        <nav className="navbar navbar-light navbar-expand-md fixed-top" style={{background: 'rgba(13, 46, 66, 0.5)'}}>
+        <nav className="navbar navbar-expand-sm fixed-top grid-topnav">
             <div className="container">
                 <div className="navbar-translate">
                     <button className="navbar-toggler navbar-toggler-right navbar-burger" 
@@ -14,7 +14,7 @@ const NavBar = ({ searchChange }) => {
                         aria-expanded="false" 
                         aria-label="Toggle navigation">
                     </button>
-                    <a className="navbar-brand" href="#">Star Citizen Vehicle Ark</a>
+                    <a className="navbar-brand">Star Citizen Vehicle Ark</a>
                 </div>
                 <div className="collapse navbar-collapse" id="navbarToggler">
                     <ul className="navbar-nav ml-auto">

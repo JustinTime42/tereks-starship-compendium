@@ -2,6 +2,7 @@ import React from 'react';
 import ships from '../ships';
 import {Popover, Modal, Tooltip, OverlayTrigger, Button} from 'react-bootstrap';
 import ShipSpecs from './ShipSpecs';
+import '../styles/ShipSpecs.css';
 const ShipModal = ({show, onClose, shipID}) => {    
   
     if(!show) {        
@@ -13,12 +14,12 @@ const ShipModal = ({show, onClose, shipID}) => {
       return (
         <div>          
   
-          <Modal show={show} onHide={onClose} bsSize="large">
+          <Modal show={show} onHide={onClose} bsSize="large" className="modal">
             <Modal.Header closeButton>
-              <Modal.Title>{ship.name}</Modal.Title>
+              <Modal.Title><h3>{ship.name}</h3></Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <img src={`https://robertsspaceindustries.com${ship.media[0].images.store_slideshow_small}`}/>
+                <img alt='Ship Image' src={`https://robertsspaceindustries.com${ship.media[0].images.store_slideshow_small}`}/>
               <div> 
                   <h4 className='tc'>{`${ship.manufacturer.name} (${ship.manufacturer.code})`}</h4>
                   <p>{ship.description}</p>
@@ -27,7 +28,7 @@ const ShipModal = ({show, onClose, shipID}) => {
               <ShipSpecs ship={ship} />
             </Modal.Body>
             <Modal.Footer>
-              <Button onClick={onClose}>Close</Button>
+              <Button className='mybtn' onClick={onClose}>Close</Button>
             </Modal.Footer>
           </Modal>
         </div>

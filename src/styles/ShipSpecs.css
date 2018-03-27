@@ -4,6 +4,7 @@
     justify-content: space-around;
     grid-column-gap: 20px;
     grid-row-gap: 5px;
+    
 }
 
 .inner-grid-container {
@@ -16,4 +17,35 @@
 .gridTitle {
     grid-column: 1 / span 2;
     text-align: center;
+}
+
+p, h2, h3, h4, h5 {
+    color: #0A89BB;
+}
+
+/* .outer-grid-container {
+    background-color: #05263E;
+} */
+
+.modal-content {
+    background-color: #05263E;
+    /* border-color: #0A89BB; */
+    /* border: none; */
+}
+
+.panel-default {
+    background-color: #05263E;
+}
+
+
+.panel {
+    background-color: #05263E;
+    border:none;
+}
+
+.specBlock {
+    display: inline;
+    padding: 4px;
+    border: 2px solid #0A89BB;
+    border-radius: 5px;
 }

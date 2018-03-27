@@ -1,9 +1,24 @@
 .card {
     overflow-y: hidden;
     height: 500px;
+ 
+ 
+   
 
+    background-color: rgba(13, 46, 66, 0.5);
+    color: #0A89BB;
 }
 
 .card:hover {
     overflow-y:auto;
+}
+
+
+.mycontainer {
+    display: grid;
+    grid-template-columns: auto auto;
+    justify-content: space-around;
+    /* grid-column-gap: 20px;
+    grid-row-gap: 5px; */
+    
 }
