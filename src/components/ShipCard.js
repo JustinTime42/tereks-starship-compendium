@@ -16,8 +16,7 @@ const ShipCard =({shipID, shipName, imageURL, manufacturer, description, pageURL
                 <button className="fr mybtn grow" onClick={modalClick}>Details</button>          
                 <h5 className='mr3' style={{clear:'both'}}>{manufacturer.code}</h5>
               
-            
-            <p className="card-text fn">{description}</p>           
+                <p className="card-text fn">{description}</p>           
             </div>  
         </div>
     )   

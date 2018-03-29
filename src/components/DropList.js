@@ -1,8 +1,9 @@
 import React from 'react'
 import ships from '../ships'
 import {DropdownButton, MenuItem} from 'react-bootstrap'
+import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 
-const DropList = ({group, addFilter}) => {
+const DropList = ({group, onFiltersChange}) => {
     let groupName = group;
     let groupProp = group;
     let choices = [];
@@ -16,36 +17,32 @@ const DropList = ({group, addFilter}) => {
         choices = ships.map(ship => {
             return ship[groupProp];
         })
-        
     }
 
-    let choices2 = Array.from(new Set(choices));
-
-            
-
+    let choices2 = Array.from(new Set(choices))
     return (
-        <div>
-            <DropdownButton 
-                bsStyle='default'
-                title={groupName}
-                key={groupName}
-                id={groupName}
-            />  
-            {
-                choices2.map((choice, i) => {
-                    
-                    return ( 
-                       <div>
-                            <input type="checkbox" />
-                            <p>{choice}</p>
-                       </div>
-                    )
-                })
-            }        
+        
+            choices2.map((choice, i) => {
+                if (!choice) {return}
+            
+                return ( 
+                    <div key={`${groupName}${i}`}>
+                        <input className="fl" type="checkbox" value={[choice]} onChange={onFiltersChange}/>
+                        <p className="cf">{choice}</p>
+                    </div>
+                );
                 
-       
-        </div>
+            })
+        
+        
     )
+    
+        
+       
+        
+    
 }
 
 export default DropList
+
+  

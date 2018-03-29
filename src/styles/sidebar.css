@@ -1,30 +1,28 @@
 /*Fixed sidenav, full height*/
 .sidenav {
     height: 100%;
-    width: 10%;
-    position: relative;
+    position: fixed;
     background-color: #111;
     overflow-x: hidden;
-    padding-top: 20px;
+    padding: 20px;
     grid-column: 1/1;
     grid-row: 1 / 3;
 }
 
 /* Style the sidenav links and the dropdown button */
 .sidenav a, .dropdown-btn {
-    grid-column: 1/1;
-    grid-row: 1 / 3;
+
     padding: 6px 8px 6px 16px;
     text-decoration: none;
     font-size: 20px;
-    color: #818181;
-    display: block;
+    /* color: #818181; */
     border: none;
     background: none;
     width: 100%;
     text-align: left;
     cursor: pointer;
     outline: none;
+
 }
 
 /* On mouse-over */
@@ -36,7 +34,7 @@
 
 /* Add an active class to the active dropdown button */
 .active {
-    background-color: green;
+    /* background-color: green; */
     color: white;
 }
 

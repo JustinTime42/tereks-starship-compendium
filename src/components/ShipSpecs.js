@@ -8,7 +8,7 @@ import SpecParser from './SpecParser'
 const ShipSpecs = ({ship}) => {
     return (
         
-        <PanelGroup accordion>
+        <PanelGroup accordion id="1">
             
             <Panel eventKey="1">
                 <Panel.Heading style={{color: '#0A89BB', backgroundColor:'#05263E', textAlign: 'center'}}> 
@@ -17,7 +17,7 @@ const ShipSpecs = ({ship}) => {
                 <Panel.Body collapsible>
                     <div className="outer-grid-container">
                         <div className="inner-grid-container">
-                            <div class="gridTitle"><h4>Dimensions</h4></div>                           
+                            <div className="gridTitle"><h4>Dimensions</h4></div>                           
                             <div><p>Length</p></div>
                             <div className='tr'><p>{ship.length}m</p></div>
                             <div><p>Beam</p></div>
@@ -37,20 +37,20 @@ const ShipSpecs = ({ship}) => {
                             
                         </div>
                         <div className="inner-grid-container">
-                            <div class="gridTitle"><h4>Maneuvering</h4></div>
-                            <div class="gridTitle"><h5>Speed</h5></div>
+                            <div className="gridTitle"><h4>Maneuvering</h4></div>
+                            <div className="gridTitle"><h5>Speed</h5></div>
                             <div><p>SCM Speed</p></div>
                             <div className='tr'><p>{ship.scm_speed}m/s</p></div> 
                             <div><p>Afterburner Speed</p></div>
                             <div className='tr'><p>{ship.afterburner_speed}m/s</p></div>
-                            <div class="gridTitle"><h5>Acceleration</h5></div>
+                            <div className="gridTitle"><h5>Acceleration</h5></div>
                             <div><p>X-Axis:</p></div> 
                             <div className='tr'><p>{ship.xaxis_acceleration}m/s/s</p></div>
                             <div><p>Y-Axis</p></div> 
                             <div className='tr'><p>{ship.yaxis_acceleration}m/s/s</p></div>
                             <div><p>Z-Axis</p></div> 
                             <div className='tr'><p>{ship.zaxis_acceleration}m/s/s</p></div> 
-                            <div class="gridTitle"><h5>Rotation</h5></div>
+                            <div className="gridTitle"><h5>Rotation</h5></div>
                             <div><p>Pitch</p></div>
                             <div className='tr'><p>{ship.pitch_max}deg/s</p></div>
                             <div><p>Yaw</p></div>

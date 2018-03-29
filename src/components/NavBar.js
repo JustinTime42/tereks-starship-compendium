@@ -1,10 +1,10 @@
 import React from 'react';
 // import SearchBox from './SearchBox';
 
-const NavBar = ({ searchChange }) => {
+const NavBar = ({ searchChange, clearSearch }) => {
     return (
-        <nav className="navbar navbar-expand-sm fixed-top grid-topnav">
-            <div className="container">
+        <nav className="navbar navbar-expand-lg fixed-top grid-topnav">
+            <div className="container" style={{position: 'fixed'}}>
                 <div className="navbar-translate">
                     <button className="navbar-toggler navbar-toggler-right navbar-burger" 
                         type="button" 
@@ -26,22 +26,15 @@ const NavBar = ({ searchChange }) => {
                                     aria-label="Search" 
                                     onChange={searchChange}
                                 />
-                            </form>
-                        </li>                   
-                        <li className="nav-item">
-                            <a 
-                                className="nav-link" 
-                                rel="tooltip" 
-                                title="Star on GitHub" 
-                                data-placement="bottom" 
-                                href="https://github.com/slarti-42/sc-vehicle-ark" 
-                                target="_blank">
-                                    <i className="fa fa-github"></i>
-                                    <p className="d-lg-none">GitHub</p>
-                            </a>
-                        </li>
+                            </form>                                                        
+                        </li>    
+                        <li className="nav-item fl">  
+                            <button className='fc form-control nav-link mybtn' onClick={clearSearch}>Clear Search</button>
+                        </li>   
                     </ul>
+                
                 </div>
+                
             </div>
         </nav>  
     );

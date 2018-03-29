@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import Footer from '../components/Footer';
-// import Loading from './components/Loading'; TODO
 import NavBar from '../components/NavBar';
 import recognizeMic from 'watson-speech/speech-to-text/recognize-microphone';
 import ShipList from '../components/ShipList'
@@ -16,21 +14,66 @@ class App extends Component {
       filteredShips: ships,
       showModal: false,
       shipID: '',
-      searchParams: []
+      searchParams: [],
     }
   }
   onModalClick = (shipID) => {
       this.setState({showModal: !this.state.showModal})
       this.setState({shipID: shipID})    
   };
-
+  
+  clearSearch = () => {
+    this.setState({searchField: ''})
+    this.setState({filteredShips: ships})
+    this.setState({searchParams: []})
+  }
   onSearchChange = (event) => {
     this.setState({searchField: event.target.value})
-    const searchShips = ships.filter(ship => {
-      return ship.name.toLowerCase().includes(this.state.searchField.toLowerCase())
-    })
-    this.setState({filteredShips: searchShips});
+    let searchShips = ships.filter(ship => {
+      if (ship.name.toLowerCase().includes(this.state.searchField.toLowerCase())) {
+        return true;
+      } else if (ship.manufacturer.name.toLowerCase().includes(this.state.searchField.toLowerCase())) {
+        return true;
+      } else if (ship.manufacturer.code.toLowerCase().includes(this.state.searchField.toLowerCase())) {
+        return true;
+      } else if (ship.type.toLowerCase().includes(this.state.searchField.toLowerCase())) {
+        return true;
+      } else if ((ship.focus) && (ship.focus.toLowerCase().includes(this.state.searchField.toLowerCase()))) {
+        return true;
+      } else {return false}
+    }
+  )
+    this.setState({filteredShips: searchShips})
   }
+
+  onFiltersChange = (event) => {   
+
+    let searchParams = this.state.searchParams;
+    
+      if (!this.state.searchParams.find(value => value === event.target.value)) {
+        searchParams.push(event.target.value)
+      } else {
+        searchParams = searchParams.filter(x => x !== event.target.value);
+      }
+      this.setState({searchParams: searchParams})
+      let searchShips = ships.filter(ship => {
+       
+          if (searchParams.some(x => ship.manufacturer.code === x)) {
+            return true;
+          } else if (searchParams.some(x => ship.type === x)) {
+            return true;
+          } else if ((ship.focus) && (searchParams.some(x => ship.type === x))) {
+            
+            return true;
+        } else {return false}
+      }
+    )
+      this.setState({filteredShips: searchShips})
+      
+    console.log("parameters " + searchParams)
+    console.log("state " + this.state.searchParams)
+    
+}
 
   voiceCommands = (input) => {
     if (input.includes('scroll down')) {
@@ -47,7 +90,10 @@ class App extends Component {
       this.setState({filteredShips: searchShips}); 
     }
   }
-  // componentDidMount(){     
+   
+
+
+  //  onListenClick = () => {   
   //   fetch('https://getstartednode-excellent-panther.mybluemix.net/api/speech-to-text/token')
   //   .then(function(response) {
   //       return response.text();
@@ -73,9 +119,9 @@ class App extends Component {
 
   render() {
     return (
-      <div className='grid-container'>   
-        <SideBar searchParams={this.searchParams} />
-        <NavBar searchChange={this.onSearchChange} /> 
+      <div className='grid-container' id="wholePage">   
+        <SideBar onFiltersChange={this.onFiltersChange} onListenClick={this.onListenClick}/>
+        <NavBar searchChange={this.onSearchChange} clearSearch={this.clearSearch} /> 
         
               
         <ShipModal 
@@ -89,8 +135,6 @@ class App extends Component {
           modalClick={this.onModalClick}
         />  
         </div>
-
-        <Footer />        
       </div>
     )
   };
