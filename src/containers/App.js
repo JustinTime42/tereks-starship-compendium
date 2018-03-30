@@ -78,6 +78,7 @@ class App extends Component {
 }
 
   voiceCommands = (input) => {
+  
     if (input.includes('scroll down')) {
       window.scrollBy(0, 400);
     } else if (input.includes('scroll up')) {
