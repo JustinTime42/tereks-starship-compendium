@@ -25,11 +25,4 @@ const SideBar = ({onFiltersChange, onListenClick}) => {
 }
 
 
-        
-       
-    
-
-
 export default SideBar;
-
-//<DropList group="manufacturer.code" addFilter={this.addFilter} />

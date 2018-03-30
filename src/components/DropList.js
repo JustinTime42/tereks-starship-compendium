@@ -21,26 +21,23 @@ const DropList = ({group, onFiltersChange}) => {
 
     let choices2 = Array.from(new Set(choices))
     return (
+        choices2.map((choice, i) => {
+            if (!choice) {return}
         
-            choices2.map((choice, i) => {
-                if (!choice) {return}
+            return ( 
+                <div key={`${groupName}${i}`}>
+                    <input 
+                        className="fl" 
+                        type="checkbox" 
+                        value={[choice]} 
+                        onChange={onFiltersChange}
+                    />
+                    <p className="cf">{choice}</p>
+                </div>
+            );
             
-                return ( 
-                    <div key={`${groupName}${i}`}>
-                        <input className="fl" type="checkbox" value={[choice]} onChange={onFiltersChange}/>
-                        <p className="cf">{choice}</p>
-                    </div>
-                );
-                
-            })
-        
-        
+        })
     )
-    
-        
-       
-        
-    
 }
 
 export default DropList

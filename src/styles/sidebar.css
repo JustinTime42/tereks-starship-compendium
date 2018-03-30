@@ -2,9 +2,10 @@
 .sidenav {
     height: 100%;
     position: fixed;
-    background-color: #111;
+    background-color: rgba(13, 46, 66, 0.5);
     overflow-x: hidden;
-    padding: 20px;
+    padding-top: 20px;
+    margin-left: 10px;
     grid-column: 1/1;
     grid-row: 1 / 3;
 }
@@ -34,7 +35,7 @@
 
 /* Add an active class to the active dropdown button */
 .active {
-    /* background-color: green; */
+
     color: white;
 }
 

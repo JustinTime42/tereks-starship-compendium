@@ -1,7 +1,6 @@
 import React from 'react';
 import ShipCard from './ShipCard';
 
-
 const ShipList = ({filteredShips, modalClick}) => {
  
     return ( 

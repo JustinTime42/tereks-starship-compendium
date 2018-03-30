@@ -1,8 +1,10 @@
 import React from 'react';
 // import SearchBox from './SearchBox';
 
-const NavBar = ({ searchChange, clearSearch }) => {
+const NavBar = ({ searchChange, clearSearch, onHelpClick }) => {
+
     return (
+        
         <nav className="navbar navbar-expand-lg fixed-top grid-topnav">
             <div className="container" style={{position: 'fixed'}}>
                 <div className="navbar-translate">
@@ -14,7 +16,7 @@ const NavBar = ({ searchChange, clearSearch }) => {
                         aria-expanded="false" 
                         aria-label="Toggle navigation">
                     </button>
-                    <a className="navbar-brand">Star Citizen Vehicle Ark</a>
+                    <a className="navbar-brand">Terek's Starship Compendium</a>
                 </div>
                 <div className="collapse navbar-collapse" id="navbarToggler">
                     <ul className="navbar-nav ml-auto">
@@ -28,14 +30,23 @@ const NavBar = ({ searchChange, clearSearch }) => {
                                 />
                             </form>                                                        
                         </li>    
-                        <li className="nav-item fl">  
-                            <button className='fc form-control nav-link mybtn' onClick={clearSearch}>Clear Search</button>
-                        </li>   
+                        <li className="nav-item ml5">  
+                            <button 
+                                className='form-control nav-link mybtn' 
+                                onClick={clearSearch}>Clear Search
+                            </button>
+                        </li>  
+                        <li className="nav-item ml2">  
+                            <button 
+                                className='fc form-control nav-link mybtn' 
+                                onClick={onHelpClick}>Help
+                            </button>
+                        </li>  
                     </ul>
                 
                 </div>
                 
-            </div>
+            </div> 
         </nav>  
     );
 }
