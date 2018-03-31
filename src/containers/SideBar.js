@@ -10,7 +10,7 @@ const SideBar = ({onFiltersChange, onListenClick}) => {
     return (
         <div className='sidenav fl grid-sidebar' >
             <div style={{position: 'fixed'}}>
-            <button className='mybtn' onClick={onListenClick}>Listen</button> 
+            
             <form id='sidebarForm'>
             <h3>Manufacturers</h3>
             <DropList group="manufacturer.code" onFiltersChange={onFiltersChange} />

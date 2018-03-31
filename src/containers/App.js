@@ -2,10 +2,13 @@ import React, { Component } from 'react';
 import HelpModal from '../components/HelpModal'
 import NavBar from '../components/NavBar';
 import recognizeMic from 'watson-speech/speech-to-text/recognize-microphone';
+import WatsonSpeech from 'watson-speech'
 import ShipList from '../components/ShipList'
 import ShipModal from '../components/ShipModal';
 import ships from '../ships'
 import SideBar from './SideBar'
+let stream = '';
+let audio;
 
 class App extends Component {
   constructor() {
@@ -17,22 +20,36 @@ class App extends Component {
       shipID: '',
       searchParams: [],
       helpModal: false,
+      listening: false,
     }
   }
-  onModalClick = (shipID) => {
-      this.setState({showModal: !this.state.showModal})
-      this.setState({shipID: shipID})    
-  };
 
-  onHelpClick = () => {
-    this.setState({helpModal: !this.state.helpModal})
-  }
-  
   clearSearch = () => {
     this.setState({searchField: ''})
     this.setState({filteredShips: ships})
     this.setState({searchParams: []})
   }
+
+  onHelpClick = () => {
+    this.setState({helpModal: true})
+    
+  }
+
+  helpClose = () => {
+    this.setState({helpModal: false})
+    this.stopSpeaking();
+  }
+
+  modalOpen = (shipID) => {
+    this.setState({showModal: true})
+    this.setState({shipID: shipID})   
+  };
+
+  modalClose = () => {
+    this.setState({showModal: false})
+    this.stopSpeaking();
+  }
+
   onSearchChange = (event) => {
     this.setState({searchField: event.target.value})
     let searchShips = ships.filter(ship => {
@@ -75,7 +92,65 @@ class App extends Component {
       }
     )
       this.setState({filteredShips: searchShips})
-}
+  }
+
+  startListening = () => {
+    fetch('https://getstartednode-excellent-panther.mybluemix.net/api/speech-to-text/token')
+    .then(function(response) {
+        return response.text();
+    }).then((token) => {
+      stream = recognizeMic({
+          token: token,
+          objectMode: true, // send objects instead of text
+          extractResults: true, // convert {results: [{alternatives:[...]}], result_index: 0} to {alternatives: [...], index: 0}
+          format: false // optional - performs basic formatting on the results such as capitals an periods
+      });      
+      stream.on('data', (data) => {        
+        if (data.final){
+          return this.voiceCommands(data.alternatives[0].transcript.trim());
+        }                
+      });   
+      stream.on('error', (err) => {
+          console.log(err);
+      });      
+    }).catch(function(error) {
+        console.log(error);
+    });       
+  } 
+
+  startSpeaking = (text) => {
+    
+    if (stream !== '') {
+      stream.stop()
+    }
+    fetch('https://getstartednode-excellent-panther.mybluemix.net/api/text-to-speech/token')
+    .then(function(response) {
+      return response.text();
+    }).then((token) => {
+      audio = WatsonSpeech.TextToSpeech.synthesize({
+        text: text,
+        token: token,
+        autoPlay: false,
+        accept: 'audio/wav',
+      })
+      audio.play();
+    });   
+  
+  }
+
+  stopListening = () => {
+    if (stream !== ''){
+      stream.stop();
+    }    
+  }
+
+  stopSpeaking = () => {
+    if (audio !== '') {
+      audio.pause();
+    }
+      
+   
+  }
 
   voiceCommands = (input) => {
   
@@ -85,7 +160,7 @@ class App extends Component {
       window.scrollBy(0, -400); 
     } else if (input.includes('clear')) {
       this.setState({filteredShips: ships}); 
-    }else if (input.includes('help')){
+    } else if (input.includes('help')){
       this.setState({helpModal: true})
     } else {  
       let searchShips = ships.filter(ship => {   
@@ -108,53 +183,35 @@ class App extends Component {
     }
   }
 
-   onListenClick = () => {   
-    fetch('https://getstartednode-excellent-panther.mybluemix.net/api/speech-to-text/token')
-    .then(function(response) {
-        return response.text();
-    }).then((token) => {
-      var stream = recognizeMic({
-          token: token,
-          objectMode: true, // send objects instead of text
-          extractResults: true, // convert {results: [{alternatives:[...]}], result_index: 0} to {alternatives: [...], index: 0}
-          format: false // optional - performs basic formatting on the results such as capitals an periods
-      });      
-      stream.on('data', (data) => {        
-        if (data.final){
-          return this.voiceCommands(data.alternatives[0].transcript.trim());
-        }                
-      });   
-      stream.on('error', (err) => {
-          console.log(err);
-      });      
-    }).catch(function(error) {
-        console.log(error);
-    });          
-  };
-
   render() {
     return (
       <div className='grid-container' id="wholePage">   
-        <SideBar onFiltersChange={this.onFiltersChange} onListenClick={this.onListenClick}/>
+        <SideBar 
+          onFiltersChange={this.onFiltersChange} 
+        />
         <NavBar 
-        searchChange={this.onSearchChange} 
-        clearSearch={this.clearSearch} 
-        onHelpClick={this.onHelpClick}
+          startListening={this.startListening}
+          searchChange={this.onSearchChange} 
+          clearSearch={this.clearSearch} 
+          onHelpClick={this.onHelpClick}
         /> 
         
         <ShipModal 
           show={this.state.showModal} 
-          onClose={this.onModalClick}  
-          shipID={this.state.shipID}      
+          onClose={this.modalClose}  
+          shipID={this.state.shipID}   
+          speak={this.startSpeaking}          
         />
         <HelpModal 
-        helpModal={this.state.helpModal} 
-        onHelpClick={this.onHelpClick} 
+          helpModal={this.state.helpModal} 
+          helpClose={this.helpClose}
+          onHelpClick={this.onHelpClick} 
+          startSpeaking={this.startSpeaking}
         />
         <div className='grid-shiplist'>       
         <ShipList 
           filteredShips={this.state.filteredShips} 
-          modalClick={this.onModalClick}
+          modalOpen={this.modalOpen}
         />  
         </div>
       </div>

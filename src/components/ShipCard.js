@@ -2,10 +2,10 @@ import React from 'react';
 import '../styles/ShipCard.css';
 
 
-const ShipCard =({shipID, shipName, imageURL, manufacturer, description, pageURL, onModalClick}) => {
+const ShipCard =({shipID, shipName, imageURL, manufacturer, description, pageURL, modalOpen}) => {
 
     const modalClick = () => {
-        onModalClick(shipID);
+        modalOpen(shipID);
     }
     return (
         <div className="card dib mr3 mb3 ml3 grow shadow-5">            

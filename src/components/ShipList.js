@@ -1,7 +1,7 @@
 import React from 'react';
 import ShipCard from './ShipCard';
 
-const ShipList = ({filteredShips, modalClick}) => {
+const ShipList = ({filteredShips, modalOpen}) => {
  
     return ( 
                   
@@ -17,7 +17,7 @@ const ShipList = ({filteredShips, modalClick}) => {
                                 pageURL= {ship.url}
                                 manufacturer = {ship.manufacturer}
                                 description = {ship.description}
-                                onModalClick = {modalClick}
+                                modalOpen = {modalOpen}
                             />
                         </div>
                     );
