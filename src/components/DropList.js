@@ -1,7 +1,5 @@
 import React from 'react'
 import ships from '../ships'
-import {DropdownButton, MenuItem} from 'react-bootstrap'
-import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 
 const DropList = ({group, onFiltersChange}) => {
     let groupName = group;
@@ -22,7 +20,9 @@ const DropList = ({group, onFiltersChange}) => {
     let choices2 = Array.from(new Set(choices))
     return (
         choices2.map((choice, i) => {
-            if (!choice) {return}
+            if (!choice) {
+                return false;
+            }
         
             return ( 
                 <div key={`${groupName}${i}`}>

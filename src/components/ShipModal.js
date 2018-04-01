@@ -14,8 +14,7 @@ const ShipModal = ({show, onClose, shipID, speak}) => {
     speak(ship.description)
 
     return (
-      <div>          
-
+      <div>         
         <Modal show={show} onHide={onClose} bsSize="large" className="modal">
           <Modal.Header closeButton>
             <h3>{ship.name}</h3>
@@ -23,8 +22,8 @@ const ShipModal = ({show, onClose, shipID, speak}) => {
           <Modal.Body>
               <img alt='Ship' src={`https://robertsspaceindustries.com${ship.media[0].images.store_slideshow_small}`}/>
             <div> 
-                <h4 className='tc'>{`${ship.manufacturer.name} (${ship.manufacturer.code})`}</h4>
-                <p>{ship.description}</p>
+              <h4 className='tc'>{`${ship.manufacturer.name} (${ship.manufacturer.code})`}</h4>
+              <p>{ship.description}</p>
             </div>
             <hr />
             <ShipSpecs ship={ship} />

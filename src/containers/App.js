@@ -7,8 +7,9 @@ import ShipList from '../components/ShipList'
 import ShipModal from '../components/ShipModal';
 import ships from '../ships'
 import SideBar from './SideBar'
+const introText = "Welcome to the starship Compendium, the best place to find information on starships in the UEE. I am happy to help you find what you are looking for. Click \"Listen\" and you can search the compendium verbally. Click \"Help\" for more information."
 let stream = '';
-let audio;
+let audio = '';
 
 class App extends Component {
   constructor() {
@@ -21,6 +22,7 @@ class App extends Component {
       searchParams: [],
       helpModal: false,
       listening: false,
+      selectListen: false,
     }
   }
 
@@ -30,14 +32,19 @@ class App extends Component {
     this.setState({searchParams: []})
   }
 
+  componentDidMount () {
+    this.startSpeaking(introText)
+  }
+
   onHelpClick = () => {
     this.setState({helpModal: true})
-    
   }
 
   helpClose = () => {
     this.setState({helpModal: false})
     this.stopSpeaking();
+    if (this.state.listening === true)
+      this.startListening();
   }
 
   modalOpen = (shipID) => {
@@ -48,6 +55,8 @@ class App extends Component {
   modalClose = () => {
     this.setState({showModal: false})
     this.stopSpeaking();
+    if (this.state.listening === true)
+      this.startListening();
   }
 
   onSearchChange = (event) => {
@@ -72,21 +81,18 @@ class App extends Component {
   onFiltersChange = (event) => {   
 
     let searchParams = this.state.searchParams;
-    
       if (!this.state.searchParams.find(value => value === event.target.value)) {
         searchParams.push(event.target.value)
       } else {
         searchParams = searchParams.filter(x => x !== event.target.value);
       }
       this.setState({searchParams: searchParams})
-      let searchShips = ships.filter(ship => {
-       
+      let searchShips = ships.filter(ship => {   
           if (searchParams.some(x => ship.manufacturer.code === x)) {
             return true;
           } else if (searchParams.some(x => ship.type === x)) {
             return true;
-          } else if ((ship.focus) && (searchParams.some(x => ship.type === x))) {
-            
+          } else if ((ship.focus) && (searchParams.some(x => ship.type === x))) {        
             return true;
         } else {return false}
       }
@@ -95,6 +101,8 @@ class App extends Component {
   }
 
   startListening = () => {
+    this.setState({listening: true})
+    this.stopSpeaking();
     fetch('https://getstartednode-excellent-panther.mybluemix.net/api/speech-to-text/token')
     .then(function(response) {
         return response.text();
@@ -119,6 +127,10 @@ class App extends Component {
   } 
 
   startSpeaking = (text) => {
+    if (audio !== '') {
+      audio.pause();
+      audio = '';
+    }
     
     if (stream !== '') {
       stream.stop()
@@ -138,18 +150,32 @@ class App extends Component {
   
   }
 
+  selectStartListening = () => {
+    this.setState({selectListen: true})
+    this.startListening() 
+  }
+
+  selectStopListening = () => {
+    this.setState({listening: false})
+    this.setState({selectListen: false})
+    if (stream !== ''){
+      stream.stop();
+    }    
+  }
+
   stopListening = () => {
+    this.setState({listening: false})
     if (stream !== ''){
       stream.stop();
     }    
   }
 
   stopSpeaking = () => {
+    this.setState({listening: true})
     if (audio !== '') {
       audio.pause();
+      audio = '';
     }
-      
-   
   }
 
   voiceCommands = (input) => {
@@ -190,10 +216,12 @@ class App extends Component {
           onFiltersChange={this.onFiltersChange} 
         />
         <NavBar 
-          startListening={this.startListening}
+          selectStartListening={this.selectStartListening}
+          selectStopListening={this.selectStopListening}
           searchChange={this.onSearchChange} 
           clearSearch={this.clearSearch} 
           onHelpClick={this.onHelpClick}
+          selectListen={this.state.selectListen}
         /> 
         
         <ShipModal 
@@ -208,11 +236,11 @@ class App extends Component {
           onHelpClick={this.onHelpClick} 
           startSpeaking={this.startSpeaking}
         />
-        <div className='grid-shiplist'>       
-        <ShipList 
-          filteredShips={this.state.filteredShips} 
-          modalOpen={this.modalOpen}
-        />  
+        <div>       
+          <ShipList 
+            filteredShips={this.state.filteredShips} 
+            modalOpen={this.modalOpen}
+          />  
         </div>
       </div>
     )

@@ -2,14 +2,14 @@ import React from 'react';
 import ShipCard from './ShipCard';
 
 const ShipList = ({filteredShips, modalOpen}) => {
- 
+    
     return ( 
                   
-        <div>
+        <div className='grid-shiplist'>
             {   
                 filteredShips.map((ship, i) => {
                     return (
-                        <div className='fl w-20' key={ship.id.toString()}>
+                        <div key={ship.id.toString()}>
                             <ShipCard                                
                                 shipID = {ship.id}
                                 shipName = {ship.name}

@@ -1,10 +1,8 @@
-import React,{Component} from 'react'
+import React from 'react'
 import '../styles/sidebar.css'
-import {ButtonToolbar} from 'react-bootstrap'
 import DropList from '../components/DropList'
-import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 
-const SideBar = ({onFiltersChange, onListenClick}) => {
+const SideBar = ({onFiltersChange}) => {
    
 
     return (

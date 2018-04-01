@@ -8,7 +8,7 @@ const ShipCard =({shipID, shipName, imageURL, manufacturer, description, pageURL
         modalOpen(shipID);
     }
     return (
-        <div className="card dib mr3 mb3 ml3 grow shadow-5">            
+        <div className="card mr3 mb3 ml3 grow shadow-5">            
             <img className="card-img-top" src={`https://robertsspaceindustries.com${imageURL}`} alt={shipName}/>
             <div className="card-body">
             

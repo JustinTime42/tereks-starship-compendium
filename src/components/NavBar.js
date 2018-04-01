@@ -1,10 +1,18 @@
 import React from 'react';
-// import SearchBox from './SearchBox';
+import SpeechButton from './SpeechButton'
 
-const NavBar = ({ searchChange, clearSearch, onHelpClick, startListening }) => {
+const NavBar = ({selectListen, selectStartListening, selectStopListening, searchChange, clearSearch, onHelpClick}) => { 
+
+    const onListenClick = () => {  
+        if (selectListen === false) {
+            selectStartListening()        
+        } else {
+            selectStopListening()        
+        }
+    }
 
     return (
-        
+    
         <nav className="navbar navbar-expand-lg fixed-top grid-topnav">
             <div className="container" style={{position: 'fixed'}}>
                     <a className="navbar-brand">Terek's Starship Compendium</a>
@@ -28,14 +36,10 @@ const NavBar = ({ searchChange, clearSearch, onHelpClick, startListening }) => {
                                 Clear Search
                             </button>
                         </li>  
-                        <li className="nav-item ml2">  
-                            <button 
-                                className='form-control nav-link mybtn' 
-                                style={{color:'#0A89BB'}}
-                                onClick = {startListening}>
-                                Listen
-                            </button>
-                        </li>
+                        <SpeechButton 
+                            selectListen={selectListen}
+                            onListenClick={onListenClick}
+                        />;
                         
                         <li className="nav-item ml5">  
                             <button 
@@ -50,7 +54,9 @@ const NavBar = ({ searchChange, clearSearch, onHelpClick, startListening }) => {
                 
             </div> 
         </nav>  
-    );
+    );    
 }
 
 export default NavBar;
+
+
