@@ -7,7 +7,7 @@ const HelpModal = ({helpModal, helpClose, startSpeaking}) => {
       return null;
     }
 
-  let helpText = "This is the best place to come for information on ships in the Star Citizen Universe. You can navigate this site with the search field at the top, the filters on the side panel, or you can click \"Listen\" and interact with the site using voice commands. You can say keywords like \"transport\" or \"combat\", you can say the names of manufacturers like \"Anvil Aerospace\" or \"Drake Interplanetary\", or you can say names of ships like \"Aurora\" or \"Avenger\". Make sure to use the site with the volume turned up, as this site will interact with you vocally as well."
+  let helpText = "This is the best place to come for information on ships in the Star Citizen Universe. You can navigate this site with the search field at the top, the filters on the side panel, or you can click \"Listen\" and interact with the site using voice commands. You can say keywords like \"transport\" or \"combat\", you can say the names of manufacturers like \"Anvil Aerospace\" or \"Drake Interplanetary\", or you can say names of ships like \"Aurora\" or \"Avenger\". You can also say \"scroll down\", \"scroll up \", \"clear search\", or \"help\". Make sure to use the site with the volume turned up, as this site will interact with you vocally as well."
   
   startSpeaking(helpText)
   
