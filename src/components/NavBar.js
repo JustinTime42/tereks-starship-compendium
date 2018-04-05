@@ -30,24 +30,32 @@ const NavBar = ({selectListen, selectStartListening, selectStopListening, search
                         </li>    
                         <li className="nav-item ml2">  
                             <button 
-                                className='form-control nav-link mybtn ' 
+                                className='form-control nav-link link mybtn ' 
                                 style={{color:'#0A89BB'}}
                                 onClick={clearSearch}>
                                 Clear Search
                             </button>
                         </li>  
                         <SpeechButton 
-                            selectListen={selectListen}
+                            selectListen={selectListen} 
                             onListenClick={onListenClick}
-                        />;
-                        
-                        <li className="nav-item ml5">  
+                        />
+                        <li className="nav-item ml6">  
                             <button 
                                 className='fc form-control nav-link mybtn'
                                 style={{color:'#0A89BB'}} 
                                 onClick={onHelpClick}>Help
                             </button>
                         </li>  
+                        <li className="nav-item ml2">  
+                        <a 
+                        className='fc form-control nav-link mybtn'
+                        style={{color:'#0A89BB'}} 
+                        href="https://www.patreon.com/bePatron?u=10537541" 
+                        data-patreon-widget-type="become-patron-button">Become a Patron!</a>
+                        <script async src="https://c6.patreon.com/becomePatronButton.bundle.js"></script>
+                        </li>  
+                      
                     </ul>
                 
                 </div>
