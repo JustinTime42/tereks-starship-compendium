@@ -1,11 +1,12 @@
 {
-  "homepage": "http://slarti-42.github.io/tereks-starship-compendium",
+  "homepage": "https://justintime42.github.io/tereks-starship-compendium/",
   "name": "tereks-starship-compendium",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
     "react": "^16.2.0",
     "react-bootstrap": "^0.32.1",
+    "react-burger-menu": "^2.4.4",
     "react-dom": "^16.2.0",
     "react-scripts": "1.1.1",
     "reactstrap": "^5.0.0-beta.3",

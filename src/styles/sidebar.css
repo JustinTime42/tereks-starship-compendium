@@ -4,7 +4,6 @@
     position: fixed;
     background-color: rgba(13, 46, 66, 0.5);
     overflow-x: hidden;
-    padding-top: 20px;
     margin-left: 10px;
     grid-column: 1/1;
     grid-row: 1 / 3;
@@ -26,19 +25,6 @@
 
 }
 
-/* On mouse-over */
-.sidenav a:hover, .dropdown-btn:hover {
-    color: #f1f1f1;
-}
-
-
-
-/* Add an active class to the active dropdown button */
-.active {
-
-    color: white;
-}
-
 /* Dropdown container (hidden by default). Optional: add a lighter background color and some left padding to change the design of the dropdown content */
 .dropdown-container {
     grid-column: 1/1;
@@ -54,8 +40,4 @@
     padding-right: 8px;
 }
 
-/* Some media queries for responsiveness */
-@media screen and (max-height: 450px) {
-    .sidenav {padding-top: 15px;}
-    .sidenav a {font-size: 18px;}
-}
+
