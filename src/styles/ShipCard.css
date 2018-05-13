@@ -1,14 +1,10 @@
-
 .card {
-    overflow-y: hidden;
-    
+    overflow-y: hidden;    
     background-color: rgba(13, 46, 66, 0.5);
     color: #0A89BB;
     width: 320px;
     height: 500px;
-    flex-shrink: .5;
-   
-    
+    flex-shrink: .5;    
 }
 
 .card:hover {

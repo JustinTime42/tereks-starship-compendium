@@ -1,5 +1,6 @@
-import React from 'react';
+import React from 'react'
 import SpeechButton from './SpeechButton'
+import { slide as Menu } from 'react-burger-menu'
 
 const NavBar = ({selectListen, selectStartListening, selectStopListening, searchChange, clearSearch, onHelpClick}) => { 
 
@@ -12,13 +13,66 @@ const NavBar = ({selectListen, selectStartListening, selectStopListening, search
     }
 
     return (
-    
-        <nav className="navbar navbar-expand-lg fixed-top grid-topnav">
-            <div className="container" style={{position: 'fixed'}}>
-                    <a className="navbar-brand">Terek's Starship Compendium</a>
-                <div className="collapse navbar-collapse" id="navbarToggler">
-                    <ul className="navbar-nav ml-auto">
-                        <li className="nav-item">
+        <div>
+            <nav className="navbar navbar-expand-sm fixed-top grid-topnav">
+                <div className="container" style={{position: 'fixed'}}>
+                        
+                    <div className="desktop" id="navbarToggler">
+                        <ul className="navbar-nav ml-auto">
+                            <li className="nav-item">
+                                <form>
+                                    <input 
+                                        className="form-control mr-sm-2 nav-link" 
+                                        type="search" placeholder="Search" 
+                                        aria-label="Search" 
+                                        onChange={searchChange}
+                                    />
+                                </form>                                                        
+                            </li>    
+                            <li className="nav-item">  
+                                <button 
+                                    className='form-control nav-link link mybtn ' 
+                                    style={{color:'#0A89BB'}}
+                                    onClick={clearSearch}>
+                                    Clear Search
+                                </button>
+                            </li>  
+                            <li className="nav-item mr3">
+                                <SpeechButton 
+                                    selectListen={selectListen} 
+                                    onListenClick={onListenClick}
+                                />
+                            </li>
+                            <a className="navbar-brand">Terek's Starship Compendium</a>
+                            <li className="nav-item">  
+                                <button 
+                                    className='fc form-control nav-link mybtn'
+                                    style={{color:'#0A89BB'}} 
+                                    onClick={onHelpClick}>Help
+                                </button>
+                            </li>  
+                            <li className="nav-item ml2">  
+                            <a 
+                                className='fc form-control nav-link mybtn'
+                                style={{color:'#0A89BB'}} 
+                                href="https://www.patreon.com/bePatron?u=10537541" 
+                                data-patreon-widget-type="become-patron-button">Become a Patron!
+                            </a>
+                            <script async src="https://c6.patreon.com/becomePatronButton.bundle.js"></script>
+                            </li>                         
+                        </ul>                  
+                    </div>                    
+                </div> 
+            </nav>  
+            <nav className="mobile fixed-top grid-topnav">            
+                <div className="container tc" style={{position: 'fixed'}}>
+                    <h2>Terek's Starship Compendium</h2>
+                </div>
+            </nav>
+            <nav>
+                <Menu burgerBarClassName="mobile">                                    
+                    <ul>
+                        <li>
                             <form>
                                 <input 
                                     className="form-control mr-sm-2 nav-link" 
@@ -28,7 +82,7 @@ const NavBar = ({selectListen, selectStartListening, selectStopListening, search
                                 />
                             </form>                                                        
                         </li>    
-                        <li className="nav-item ml2">  
+                        <li>  
                             <button 
                                 className='form-control nav-link link mybtn ' 
                                 style={{color:'#0A89BB'}}
@@ -36,11 +90,13 @@ const NavBar = ({selectListen, selectStartListening, selectStopListening, search
                                 Clear Search
                             </button>
                         </li>  
-                        <SpeechButton 
-                            selectListen={selectListen} 
-                            onListenClick={onListenClick}
-                        />
-                        <li className="nav-item ml6">  
+                        <li>
+                            <SpeechButton 
+                                selectListen={selectListen} 
+                                onListenClick={onListenClick}
+                            />
+                        </li>                        
+                        <li className="nav-item">  
                             <button 
                                 className='fc form-control nav-link mybtn'
                                 style={{color:'#0A89BB'}} 
@@ -49,19 +105,17 @@ const NavBar = ({selectListen, selectStartListening, selectStopListening, search
                         </li>  
                         <li className="nav-item ml2">  
                         <a 
-                        className='fc form-control nav-link mybtn'
-                        style={{color:'#0A89BB'}} 
-                        href="https://www.patreon.com/bePatron?u=10537541" 
-                        data-patreon-widget-type="become-patron-button">Become a Patron!</a>
+                            className='fc form-control nav-link mybtn'
+                            style={{color:'#0A89BB'}} 
+                            href="https://www.patreon.com/bePatron?u=10537541" 
+                            data-patreon-widget-type="become-patron-button">Become a Patron!
+                        </a>
                         <script async src="https://c6.patreon.com/becomePatronButton.bundle.js"></script>
-                        </li>  
-                      
-                    </ul>
-                
-                </div>
-                
-            </div> 
-        </nav>  
+                        </li>                          
+                    </ul>                    
+                </Menu> 
+            </nav> 
+        </div>
     );    
 }
 
